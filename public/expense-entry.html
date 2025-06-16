@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense - Expense Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#2d2d2d',
+                        accent: '#404040',
+                        light: '#f5f5f5',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        .flatpickr-calendar {
+            background: #2d2d2d !important;
+            border: 1px solid #404040 !important;
+        }
+        .flatpickr-day {
+            color: #f5f5f5 !important;
+        }
+        .flatpickr-day.selected {
+            background: #404040 !important;
+            border-color: #404040 !important;
+        }
+        .flatpickr-day:hover {
+            background: #404040 !important;
+        }
+        .flatpickr-months .flatpickr-month {
+            background: #2d2d2d !important;
+            color: #f5f5f5 !important;
+        }
+        .flatpickr-current-month .flatpickr-monthDropdown-months {
+            background: #2d2d2d !important;
+            color: #f5f5f5 !important;
+        }
+        .flatpickr-weekday {
+            color: #f5f5f5 !important;
+        }
+    </style>
+</head>
+<body class="bg-primary min-h-screen">
+    <nav class="bg-secondary shadow-xl border-b border-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-light">Add New Expense</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/dashboard.html" class="text-light hover:text-gray-300 transition-colors duration-200">Back to Dashboard</a>
+                    <button id="logoutBtn" class="text-light hover:text-gray-300 transition-colors duration-200">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <div class="bg-secondary rounded-lg shadow-xl p-6 border border-accent">
+                <form id="expenseForm" class="space-y-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-light">Add New Expense</h2>
+                        <a href="/currency-converter.html" class="text-accent hover:text-light transition-colors duration-200">
+                            Currency Converter
+                        </a>
+                    </div>
+                    
+                    <div>
+                        <label for="currency" class="block text-sm font-medium text-light">Currency</label>
+                        <select id="currency" name="currency" required
+                            class="mt-1 block w-full rounded-md bg-accent border-accent text-light focus:border-light focus:ring-light">
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="AUD">AUD - Australian Dollar</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                            <option value="CHF">CHF - Swiss Franc</option>
+                            <option value="CNY">CNY - Chinese Yuan</option>
+                            <option value="INR">INR - Indian Rupee</option>
+                        </select>
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label class="block text-sm font-medium text-light">Date</label>
+                        <input type="text" id="date" required
+                            class="mt-1 block w-full rounded-md bg-accent border-accent text-light placeholder-gray-400 focus:border-light focus:ring-light">
+                    </div>
+
+                    <!-- Transaction Type -->
+                    <div>
+                        <label class="block text-sm font-medium text-light">Type of Transaction</label>
+                        <input type="text" id="transactionType" required
+                            class="mt-1 block w-full rounded-md bg-accent border-accent text-light placeholder-gray-400 focus:border-light focus:ring-light"
+                            placeholder="e.g., Food, Transport, Accommodation">
+                    </div>
+
+                    <!-- Total Amount -->
+                    <div>
+                        <label class="block text-sm font-medium text-light">Total Amount</label>
+                        <input type="number" id="totalAmount" required min="0" step="0.01"
+                            class="mt-1 block w-full rounded-md bg-accent border-accent text-light placeholder-gray-400 focus:border-light focus:ring-light">
+                    </div>
+
+                    <!-- Split Type -->
+                    <div>
+                        <label class="block text-sm font-medium text-light">Split Type</label>
+                        <select id="splitType" required
+                            class="mt-1 block w-full rounded-md bg-accent border-accent text-light focus:border-light focus:ring-light">
+                            <option value="">Select split type</option>
+                            <option value="equal">Split Equal</option>
+                            <option value="percentage">Split Unequal - Percentage</option>
+                            <option value="amount">Split Unequal - Amount</option>
+                        </select>
+                    </div>
+
+                    <!-- Split Details Container -->
+                    <div id="splitDetailsContainer" class="space-y-4 hidden">
+                        <!-- Will be populated dynamically based on split type -->
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full bg-accent text-light py-2 px-4 rounded-md hover:bg-opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-light focus:ring-offset-2 focus:ring-offset-secondary">
+                        Submit Expense
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/expense-entry.js"></script>
+</body>
+</html> 

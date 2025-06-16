@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#2d2d2d',
+                        accent: '#404040',
+                        light: '#f5f5f5',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-primary min-h-screen">
+    <nav class="bg-secondary shadow-xl border-b border-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-light">Expense Tracker</h1>
+                </div>
+                <div class="flex items-center">
+                    <button id="logoutBtn" class="text-light hover:text-gray-300 transition-colors duration-200">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <div class="bg-secondary rounded-lg shadow-xl p-6 border border-accent">
+                <form id="groupForm" class="space-y-6">
+                    <div id="step1" class="space-y-4">
+                        <h2 class="text-lg font-medium text-light">Step 1: Number of Members</h2>
+                        <div>
+                            <label class="block text-sm font-medium text-light">How many members are in your group?</label>
+                            <input type="number" id="memberCount" min="2" required
+                                class="mt-1 block w-full rounded-md bg-accent border-accent text-light placeholder-gray-400 focus:border-light focus:ring-light">
+                        </div>
+                        <button type="button" id="nextToStep2"
+                            class="bg-accent text-light py-2 px-4 rounded-md hover:bg-opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-light focus:ring-offset-2 focus:ring-offset-secondary">
+                            Next
+                        </button>
+                    </div>
+
+                    <div id="step2" class="space-y-4 hidden">
+                        <h2 class="text-lg font-medium text-light">Step 2: Member Names</h2>
+                        <div id="memberNamesContainer" class="space-y-4">
+                            <!-- Member name inputs will be added here dynamically -->
+                        </div>
+                        <button type="button" id="nextToPayer"
+                            class="bg-accent text-light py-2 px-4 rounded-md hover:bg-opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-light focus:ring-offset-2 focus:ring-offset-secondary">
+                            Next
+                        </button>
+                        <div id="payerContainer" class="hidden mt-4">
+                            <label class="block text-sm font-medium text-light">Who will pay the amount among the members?</label>
+                            <select id="defaultPayer" required 
+                                class="mt-1 block w-full rounded-md bg-accent border-accent text-light focus:border-light focus:ring-light">
+                            </select>
+                            <button type="button" id="nextToStep3" disabled
+                                class="mt-4 bg-accent text-light py-2 px-4 rounded-md hover:bg-opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-light focus:ring-offset-2 focus:ring-offset-secondary">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="step3" class="space-y-4 hidden">
+                        <h2 class="text-lg font-medium text-light">Step 3: Budget Preferences</h2>
+                        <div id="budgetPreferencesContainer" class="space-y-4">
+                            <!-- Budget preference selects will be added here dynamically -->
+                        </div>
+                        <button type="submit"
+                            class="bg-accent text-light py-2 px-4 rounded-md hover:bg-opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-light focus:ring-offset-2 focus:ring-offset-secondary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 

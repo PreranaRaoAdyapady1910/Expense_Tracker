@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Amounts - Expense Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#2d2d2d',
+                        accent: '#404040',
+                        light: '#f5f5f5',
+                        blue: {
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-primary min-h-screen">
+    <nav class="bg-secondary shadow-xl border-b border-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-light">Calculate Amounts</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/report.html" class="text-light hover:text-gray-300 transition-colors duration-200">Back to Report</a>
+                    <button id="logoutBtn" class="text-light hover:text-gray-300 transition-colors duration-200">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <!-- Header Section -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-light mb-2">Settlement Overview</h2>
+                <p class="text-gray-400">View detailed breakdown of expenses and required settlements between group members.</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-secondary rounded-lg shadow-xl p-6 border border-accent">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm">Total Expenses</p>
+                            <h3 class="text-2xl font-bold text-light mt-1" id="totalExpenses">₹0.00</h3>
+                        </div>
+                        <div class="bg-blue-500 bg-opacity-20 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-secondary rounded-lg shadow-xl p-6 border border-accent">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm">Average Per Person</p>
+                            <h3 class="text-2xl font-bold text-light mt-1" id="averagePerPerson">₹0.00</h3>
+                        </div>
+                        <div class="bg-blue-500 bg-opacity-20 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-secondary rounded-lg shadow-xl p-6 border border-accent">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm">Pending Settlements</p>
+                            <h3 class="text-2xl font-bold text-light mt-1" id="pendingSettlements">0</h3>
+                        </div>
+                        <div class="bg-blue-500 bg-opacity-20 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="bg-secondary rounded-lg shadow-xl p-6 border border-accent">
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-light mb-2">Settlement Details</h2>
+                    <p class="text-gray-400">Detailed breakdown of who owes whom and how much.</p>
+                </div>
+                
+                <div id="calculationResults" class="space-y-6">
+                    <!-- Results will be populated here -->
+                </div>
+
+                <div class="mt-8 flex justify-center space-x-4">
+                    <a href="/report.html" 
+                        class="bg-accent text-light py-2 px-6 rounded-md hover:bg-opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-light focus:ring-offset-2 focus:ring-offset-secondary flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Report
+                    </a>
+                    <button id="downloadBtn" 
+                        class="bg-blue-500 text-light py-2 px-6 rounded-md hover:bg-blue-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-secondary flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        Download Summary
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/calculate.js"></script>
+</body>
+</html> 

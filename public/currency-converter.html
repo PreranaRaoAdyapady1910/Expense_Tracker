@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter - Expense Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#2d2d2d',
+                        accent: '#404040',
+                        light: '#f5f5f5',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-primary min-h-screen">
+    <nav class="bg-secondary shadow-xl border-b border-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-light">Currency Converter</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/dashboard.html" class="text-light hover:text-gray-300 transition-colors duration-200">Back to Dashboard</a>
+                    <button id="logoutBtn" class="text-light hover:text-gray-300 transition-colors duration-200">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <div class="bg-secondary rounded-lg shadow-xl p-6 border border-accent">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Amount Input -->
+                    <div class="space-y-4">
+                        <div>
+                            <label for="amount" class="block text-sm font-medium text-light">Amount</label>
+                            <input type="number" id="amount" name="amount" step="0.01" min="0"
+                                class="mt-1 block w-full rounded-md bg-accent border-accent text-light placeholder-gray-400 focus:border-light focus:ring-light">
+                        </div>
+                        <div>
+                            <label for="fromCurrency" class="block text-sm font-medium text-light">From Currency</label>
+                            <select id="fromCurrency" name="fromCurrency"
+                                class="mt-1 block w-full rounded-md bg-accent border-accent text-light focus:border-light focus:ring-light">
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="JPY">JPY - Japanese Yen</option>
+                                <option value="AUD">AUD - Australian Dollar</option>
+                                <option value="CAD">CAD - Canadian Dollar</option>
+                                <option value="CHF">CHF - Swiss Franc</option>
+                                <option value="CNY">CNY - Chinese Yuan</option>
+                                <option value="INR">INR - Indian Rupee</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="toCurrency" class="block text-sm font-medium text-light">To Currency</label>
+                            <select id="toCurrency" name="toCurrency"
+                                class="mt-1 block w-full rounded-md bg-accent border-accent text-light focus:border-light focus:ring-light">
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="JPY">JPY - Japanese Yen</option>
+                                <option value="AUD">AUD - Australian Dollar</option>
+                                <option value="CAD">CAD - Canadian Dollar</option>
+                                <option value="CHF">CHF - Swiss Franc</option>
+                                <option value="CNY">CNY - Chinese Yuan</option>
+                                <option value="INR">INR - Indian Rupee</option>
+                            </select>
+                        </div>
+                        <button id="convertBtn"
+                            class="w-full bg-accent text-light py-2 px-4 rounded-md hover:bg-opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-light focus:ring-offset-2 focus:ring-offset-secondary">
+                            Convert
+                        </button>
+                    </div>
+
+                    <!-- Result Display -->
+                    <div class="bg-accent rounded-lg p-6">
+                        <h2 class="text-lg font-semibold text-light mb-4">Conversion Result</h2>
+                        <div id="result" class="text-3xl font-bold text-light mb-2">0.00</div>
+                        <div id="rate" class="text-sm text-gray-400">Exchange Rate: 1.00</div>
+                        <div class="mt-6">
+                            <h3 class="text-md font-semibold text-light mb-2">Recent Conversions</h3>
+                            <div id="history" class="space-y-2">
+                                <!-- History items will be added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/currency-converter.js"></script>
+</body>
+</html> 
